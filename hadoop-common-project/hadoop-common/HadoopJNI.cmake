@@ -34,7 +34,8 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     # Locate JNI_INCLUDE_DIRS and JNI_LIBRARIES.
     # Since we were invoked from Maven, we know that the JAVA_HOME environment
     # variable is valid.  So we ignore system paths here and just use JAVA_HOME.
-    file(TO_CMAKE_PATH "$ENV{JAVA_HOME}" _java_home)
+    set(JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/)
+    file(TO_CMAKE_PATH ${JAVA_HOME} _java_home)
     if(CMAKE_SYSTEM_PROCESSOR MATCHES "^i.86$")
         set(_java_libarch "i386")
     elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64" OR CMAKE_SYSTEM_PROCESSOR STREQUAL "amd64")
@@ -78,6 +79,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     unset(_java_libarch)
     unset(_java_home)
 
+    message("_JDK_DIRS=${_JDK_DIRS}")
     message("JAVA_HOME=${JAVA_HOME}, JAVA_JVM_LIBRARY=${JAVA_JVM_LIBRARY}")
     message("JAVA_INCLUDE_PATH=${JAVA_INCLUDE_PATH}, JAVA_INCLUDE_PATH2=${JAVA_INCLUDE_PATH2}")
     if(JAVA_JVM_LIBRARY AND JAVA_INCLUDE_PATH AND JAVA_INCLUDE_PATH2)
